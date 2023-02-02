@@ -11,6 +11,23 @@ const register = async (req, res, next) => {
       username: req.body.username,
       email: req.body.email,
       password: hash,
+      phone_number: req.body.phone_number,
+      birthday: req.body.birthday,
+      gender: req.body.gender,
+      location: req.body.location,
+      states: req.body.states,
+      photo: req.body.photo,
+      tripHistory: req.body.tripHistory,
+      rating: req.body.rating,
+      car_details: [
+        {
+          car_model: req.body.car_details.car_model,
+          car_number: req.body.car_details.car_number,
+          car_type: req.body.car_details.car_type,
+        },
+      ],
+      earnings: req.body.earnings,
+      new_ride_status: req.body.new_ride_status,
     });
     await newUser.save();
     res.status(200).send("user has been created");

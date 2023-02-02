@@ -16,16 +16,43 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    drivers: {
-      type: [String],
-    },
-    clients: {
-      type: [String],
+    phone_number: {
+      type: Number,
     },
 
-    isAdmin: {
+    birthday: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+    },
+    states: {
+      type: String,
+      required: true,
+    },
+    photo: {
+      type: String,
+    },
+    tripHistory: {
+      type: [Number],
+    },
+    rating: {
+      type: Number,
+      min: 0,
+      max: 5,
+    },
+    car_details: [{ car_model: String, car_number: Number, car_type: String }],
+    earnings: {
+      type: [Number],
+    },
+    new_ride_status: {
       type: Boolean,
       default: false,
+      required: true,
     },
   },
   { timestamps: true }
