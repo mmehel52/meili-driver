@@ -50,9 +50,11 @@ const UserSchema = new mongoose.Schema(
       type: [Number],
     },
     new_ride_status: {
-      type: Boolean,
-      default: false,
+      type: String,
       required: true,
+    },
+    actives: {
+      type: [String],
     },
   },
   { timestamps: true }
