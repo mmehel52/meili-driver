@@ -1,4 +1,5 @@
 const Active = require("../models/Actives.js");
+const User = require("../models/Users.js");
 
 const createActive = async (req, res, next) => {
   const userId = req.params.userid;
@@ -7,7 +8,7 @@ const createActive = async (req, res, next) => {
   try {
     const savedActive = await newActive.save();
     try {
-      await Active.findByIdAndUpdate(userId, {
+      await User.findByIdAndUpdate(userId, {
         $push: { actives: savedActive._id },
       });
     } catch (err) {
@@ -33,8 +34,16 @@ const updateActive = async (req, res, next) => {
   }
 };
 const deleteActive = async (req, res, next) => {
+  const userId = req.params.userid;
   try {
     await Active.findByIdAndDelete(req.params.id);
+    try {
+      await User.findByIdAndUpdate(userId, {
+        $pull: { actives: req.params.id },
+      });
+    } catch (err) {
+      next(err);
+    }
     res.status(200).json("Active has been deleted");
   } catch (err) {
     next(err);
@@ -43,6 +52,7 @@ const deleteActive = async (req, res, next) => {
 const getActive = async (req, res, next) => {
   try {
     const active = await Active.findById(req.params.id);
+
     res.status(200).json(active);
   } catch (err) {
     next(err);

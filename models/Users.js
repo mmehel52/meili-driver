@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
+      unique: true,
     },
     email: {
       type: String,
@@ -49,9 +50,10 @@ const UserSchema = new mongoose.Schema(
     earnings: {
       type: [Number],
     },
+
     new_ride_status: {
       type: String,
-      required: true,
+      default: "offline",
     },
     actives: {
       type: [String],

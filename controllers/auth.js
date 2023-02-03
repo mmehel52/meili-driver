@@ -27,7 +27,7 @@ const register = async (req, res, next) => {
         },
       ],
       earnings: req.body.earnings,
-      new_ride_status: req.body.new_ride_status,
+      // new_ride_status: req.body.new_ride_status,
     });
     await newUser.save();
     res.status(200).send("user has been created");
