@@ -9,10 +9,13 @@ const createRequest = async (req, res, next) => {
 
   try {
     const savedRequest = await newRequest.save();
+
     try {
       await Driver.findByIdAndUpdate(driverId, {
-        $push: { tripHistory: savedRequest._id },
-        $push: { earnings: savedRequest.fare_amount },
+        $push: {
+          tripHistory: savedRequest._id,
+          earnings: savedRequest.fare_amount,
+        },
       });
     } catch (err) {
       next(err);
@@ -33,7 +36,14 @@ const deleteRequest = async (req, res, next) => {
   const driverId = req.params.driverid;
   const clientId = req.params.clientid;
   try {
-    await Active.findByIdAndDelete(req.params.id);
+    await Request.findByIdAndDelete(req.params.id);
+    try {
+      await Client.findByIdAndUpdate(clientId, {
+        $pull: { tripHistory: req.params.id },
+      });
+    } catch (err) {
+      next(err);
+    }
     try {
       await Driver.findByIdAndUpdate(driverId, {
         $pull: { earnings: req.params.fare_amount },
@@ -67,6 +77,7 @@ const getRequests = async (req, res, next) => {
 
 module.exports = {
   createRequest,
+  deleteRequest,
   getRequest,
   getRequests,
 };
