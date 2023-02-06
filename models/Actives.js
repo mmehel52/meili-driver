@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const GeoPoint = require("geopoint");
 const { Schema } = mongoose;
 
 const ActiveSchema = new mongoose.Schema(
@@ -10,10 +9,6 @@ const ActiveSchema = new mongoose.Schema(
     },
 
     position: { geohash: String, geopoint: String },
-    active_status: {
-      type: String,
-      default: "active",
-    },
   },
   { timestamps: true }
 );

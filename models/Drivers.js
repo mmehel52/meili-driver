@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const UserSchema = new mongoose.Schema(
+const DriverSchema = new mongoose.Schema(
   {
-    username: {
+    name: {
       type: String,
       required: true,
       unique: true,
@@ -20,33 +20,17 @@ const UserSchema = new mongoose.Schema(
     phone_number: {
       type: Number,
     },
-
-    birthday: {
-      type: Date,
+    phone_prefix: {
+      type: Number,
     },
-    gender: {
-      type: String,
-      required: true,
-    },
-    location: {
-      type: String,
-    },
-    states: {
-      type: String,
-      required: true,
-    },
-    photo: {
+    profilPicture: {
       type: String,
     },
     tripHistory: {
       type: [Number],
     },
-    rating: {
-      type: Number,
-      min: 0,
-      max: 5,
-    },
-    car_details: [{ car_model: String, car_number: Number, car_type: String }],
+
+    car_details: { car_model: String, car_number: Number, car_type: String },
     earnings: {
       type: [Number],
     },
@@ -56,12 +40,12 @@ const UserSchema = new mongoose.Schema(
       default: "offline",
     },
     actives: {
-      type: [String],
+      type: String,
     },
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("User", UserSchema);
+const Driver = mongoose.model("Driver", DriverSchema);
 
-module.exports = User;
+module.exports = Driver;
