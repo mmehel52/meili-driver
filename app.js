@@ -6,6 +6,7 @@ const authClientsRoute = require("./routes/auth-clients");
 const driversRoute = require("./routes/drivers");
 const clientsRoute = require("./routes/clients");
 const activesRoute = require("./routes/actives");
+const requestsRoute = require("./routes/requests");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -35,6 +36,7 @@ app.use("/api/authclients", authClientsRoute);
 app.use("/api/drivers", driversRoute);
 app.use("/api/clients", clientsRoute);
 app.use("/api/actives", activesRoute);
+app.use("/api/requests", requestsRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

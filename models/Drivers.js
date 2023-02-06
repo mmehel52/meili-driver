@@ -27,7 +27,7 @@ const DriverSchema = new mongoose.Schema(
       type: String,
     },
     tripHistory: {
-      type: [Number],
+      type: [String],
     },
 
     car_details: { car_model: String, car_number: Number, car_type: String },

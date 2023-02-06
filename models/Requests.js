@@ -24,7 +24,7 @@ const RequestSchema = new mongoose.Schema(
       type: String,
     },
     fare_amount: {
-      type: String,
+      type: Number,
     },
     origin: {
       latitude: String,

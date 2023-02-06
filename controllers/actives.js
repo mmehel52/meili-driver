@@ -1,14 +1,14 @@
 const Active = require("../models/Actives.js");
-const User = require("../models/Drivers.js");
+const Driver = require("../models/Drivers.js");
 
 const createActive = async (req, res, next) => {
-  const userId = req.params.userid;
+  const driverId = req.params.driverid;
   const newActive = new Active(req.body);
 
   try {
     const savedActive = await newActive.save();
     try {
-      await User.findByIdAndUpdate(userId, {
+      await Driver.findByIdAndUpdate(driverId, {
         $set: { actives: savedActive._id },
       });
     } catch (err) {
@@ -34,11 +34,11 @@ const updateActive = async (req, res, next) => {
   }
 };
 const deleteActive = async (req, res, next) => {
-  const userId = req.params.userid;
+  const driverId = req.params.driverid;
   try {
     await Active.findByIdAndDelete(req.params.id);
     try {
-      await User.findByIdAndUpdate(userId, {
+      await Driver.findByIdAndUpdate(driverId, {
         $unset: { actives: req.params.id },
       });
     } catch (err) {
